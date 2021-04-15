@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Mahsulotlar Ro'yxaati{% endblock title %}
+{% block content %}
+    <div class="jumbotron">
+    <h4>Mahsulotlar ruyhati</h4>
+    <table class="table table-borderless">
+        <thead class="border-bottom font-weight-bolt">
+        <tr>
+            <td>Id</td>
+            <td>Mahsulot nomi</td>
+            <td>Turi</td>
+            <td>Og'irligi
+                <br>Kg larda</td>
+            <td>Chiqarilgan sanasi</td>
+            <TD>
+                <a href="{% url 'employee_insert' %}" class="btn btn-outline-success" >
+                    <i class="fas fa-plus"></i>Add New
+                </a>
+            </TD>
+        </tr>
+        </thead>
+        <tbody>
+        {% for employee in employee_list %}
+        <tr>
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.m_nomi }}</td>
+            <td>{{ employee.turi }}</td>
+            <td>{{ employee.ogirligi }}</td>
+            <td>{{ employee.chiqarilgan_sanasi }}</td>
+        <td>
+            <a href="{% url 'employee_update' employee.id %}" class="btn btn-secondary px-0">
+                <i class="far fa-edit fa-lg"></i>
+            </a>
+            <form action="{% url 'employee_delete' employee.id %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn">
+                    <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                </button>
+            </form>
+        </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock content %}

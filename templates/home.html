@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Bosh sahifa{% endblock title %}
+<head>
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+{% block content %}
+    <div class="jumbotron">
+    {% if user.is_authenticated %}
+        <h3>
+            <p>{{ user.username }}</p>
+    <p>
+        <a class="btn btn-primary" type="submit" href="{% url 'employee_list' %}">Mahsulotlar  Ro'yxati</a>
+         <button class="btn btn-success" type="submit">Qurulish jihozlari</button>
+        <button class="btn btn-success" type="submit">Kiyim-kechaklar</button>
+            <p><br><a href="{% url 'logout' %}">Chiqish</a></p>
+        </h3>
+        </div>
+    {% else %}
+        <div class="jumbotron">
+        <h4>
+    <p>Siz ro'yxatdan o'tmagansiz !</p>
+    <a href="{% url 'login' %}">Hisobga kirish</a>  |
+    <a href="{% url 'signup' %}">Ro'yxatdan o'tish</a>
+        </h4>
+        </div>
+    {% endif %}
+{% endblock %}
+
+</body>
